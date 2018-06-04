@@ -25,6 +25,7 @@ add_library(audio_core STATIC
 
     $<$<BOOL:${SDL2_FOUND}>:sdl2_sink.cpp sdl2_sink.h>
     $<$<BOOL:${ENABLE_LIBRETRO}>:libretro_sink.cpp libretro_sink.h>
+    $<$<BOOL:${ENABLE_CUBEB}>:cubeb_sink.cpp cubeb_sink.h>
 )
 
 create_target_directory_groups(audio_core)
@@ -37,7 +38,15 @@ if(SDL2_FOUND)
     target_compile_definitions(audio_core PRIVATE HAVE_SDL2)
 endif()
 
+<<<<<<< HEAD
 if (ENABLE_LIBRETRO)
     target_link_libraries(audio_core PRIVATE libretro)
     target_compile_definitions(audio_core PRIVATE HAVE_LIBRETRO)
 endif()
+=======
+if(ENABLE_CUBEB)
+    target_link_libraries(audio_core PRIVATE cubeb)
+    add_definitions(-DHAVE_CUBEB=1)
+endif()
+
+>>>>>>> upstream/master

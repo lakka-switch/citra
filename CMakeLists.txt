@@ -21,6 +21,7 @@ option(ENABLE_LIBRETRO "Enable the LibRetro frontend" OFF)
 option(ENABLE_WEB_SERVICE "Enable web services (telemetry, etc.)" ON)
 
 option(DISABLE_CLANG_TARGET "Disables the Clang format check" ON)
+option(ENABLE_CUBEB "Enables the cubeb audio backend" ON)
 
 if(NOT EXISTS ${CMAKE_SOURCE_DIR}/.git/hooks/pre-commit)
     message(STATUS "Copying pre-commit hook")
@@ -123,6 +124,8 @@ if (NOT MSVC)
 else()
     # Silence "deprecation" warnings
     add_definitions(/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /D_SCL_SECURE_NO_WARNINGS)
+    # Avoid non-compliant standard library extensions
+    add_definitions(/D_CRT_DECLARE_NONSTDC_NAMES)
     # Avoid windows.h junk
     add_definitions(/DNOMINMAX)
     # Avoid windows.h from including some usually unused libs like winsocks.h, since this might cause some redefinition errors.
