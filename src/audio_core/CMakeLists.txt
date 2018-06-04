@@ -38,15 +38,13 @@ if(SDL2_FOUND)
     target_compile_definitions(audio_core PRIVATE HAVE_SDL2)
 endif()
 
-<<<<<<< HEAD
+
 if (ENABLE_LIBRETRO)
     target_link_libraries(audio_core PRIVATE libretro)
     target_compile_definitions(audio_core PRIVATE HAVE_LIBRETRO)
 endif()
-=======
+
 if(ENABLE_CUBEB)
     target_link_libraries(audio_core PRIVATE cubeb)
     add_definitions(-DHAVE_CUBEB=1)
 endif()
-
->>>>>>> upstream/master
